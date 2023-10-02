@@ -1,25 +1,33 @@
-import { Map } from '@pbe/react-yandex-maps';
+import { Map, Placemark } from '@pbe/react-yandex-maps';
 import styles from './css/Map.module.css';
 import usePosition, { PositionObject } from '../helpers/usePosition';
 import { useState, useEffect } from "react";
+import IconLocation from '../../../assets/icon-location.svg';
 
 const MapComponent = () => {
     const {latitude, longitude, error} = usePosition();
-    //const [coords, setCoords] =useState<PositionObject>({latitude: 55.75, longitude: 37.57})
-
-    // useEffect(() => {
-    //     const {latitude, longitude, error} = usePosition();
-    //     if(latitude != undefined && longitude != undefined){
-    //         setCoords({latitude: latitude, longitude: longitude});
-    //     }
-    //     else{
-    //         console.log(error);
-    //     }
-    // }, [])
 
     return(
         <div>
-            <Map className={styles.mapDiv} defaultState={{ center: [latitude, longitude], zoom: 9 }} />
+            <Map 
+                className={styles.mapDiv} 
+                defaultState={
+                    { 
+                        center: [latitude, longitude], 
+                        zoom: 13.5,
+                        controls: ["zoomControl"]
+                    }
+                }
+                modules={["control.ZoomControl"]}>
+                    <Placemark
+                        geometry={[latitude, longitude]}
+                        properties={{
+                        }}
+                        options={{
+                            iconLayout: 'default#image',
+                            iconImageHref: IconLocation,
+                        }}/>
+            </Map>
         </div>
     );
 }
