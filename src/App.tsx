@@ -1,9 +1,11 @@
 import React from 'react';
-import './App.css';
+import styles from './App.module.css';
+import MapPage from './pages/MapPage';
 
 function App() {
   return (
     <div className="App">
+      <MapPage/>
     </div>
   );
 }
