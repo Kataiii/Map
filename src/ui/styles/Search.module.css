@@ -1,0 +1,29 @@
+.search{
+    width: 373px;
+    height: 55px;
+    display: flex;
+    justify-content: end;
+    padding: 0 10px 0 0;
+    border-radius: 15px;
+    position: relative;
+}
+
+.search_input{
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 300;
+    border: none;
+    background-color: #ffffff00;
+    position: absolute;
+    left: 20px;
+    width: 80%;
+    height: 100%;
+    outline: none;
+}
+
+.img_search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

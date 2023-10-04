@@ -1,3 +1,29 @@
 .App {
   text-align: center;
 }
+
+.light{
+  background-color: #fff;
+  color: #1A1D24;
+}
+
+.light:hover{
+  background-color: #e7e7e7;
+}
+
+.light:active{
+  background-color: #c9c9c9;
+}
+
+.dark{
+  background-color: #363E4B;
+  color: #A7B0BF;
+}
+
+.dark:hover{
+  background-color: #2b313b;
+}
+
+.dark:active{
+  background-color: #191c22;
+}

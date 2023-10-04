@@ -1,6 +1,6 @@
 import { Map, Placemark } from '@pbe/react-yandex-maps';
 import styles from './css/Map.module.css';
-import usePosition, { PositionObject } from '../helpers/usePosition';
+import usePosition from '../helpers/usePosition';
 import { useState, useEffect } from "react";
 import IconLocation from '../../../assets/icon-location.svg';
 
@@ -26,6 +26,7 @@ const MapComponent = () => {
                         options={{
                             iconLayout: 'default#image',
                             iconImageHref: IconLocation,
+                            iconImageSize: [40, 52],
                         }}/>
             </Map>
         </div>
