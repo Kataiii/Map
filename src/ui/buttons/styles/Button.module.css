@@ -21,3 +21,27 @@
 .primary_button:active{
     background: #033886;
 }
+
+.btnTypeRoute{
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    gap: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.btnTypeRouteText{
+    font-family: Inter;
+    width: max-content;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+
+.default{
+    color: #A7B0BF;
+}

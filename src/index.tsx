@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <ThemeContext.Provider value={Theme.dark}>
+  <ThemeContext.Provider value={Theme.light}>
         <App />
   </ThemeContext.Provider>
 );

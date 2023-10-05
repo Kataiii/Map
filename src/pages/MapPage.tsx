@@ -9,6 +9,8 @@ import PrimaryButtom from '../ui/buttons/PrimaryButton';
 import Search from '../ui/Search';
 import TypeRouteButton from '../ui/buttons/TypeRouteButton';
 import TypesNavigation from '../modules/Navigation/components/TypesNavigation';
+import { departaments } from '../entities/Departament';
+import RecentlyFoundCard from '../ui/cards/RecentlyFoundCard';
 
 
 const MapPage = () => {

@@ -1,0 +1,7 @@
+.wrapTypesNav{
+    width: 373px;
+    display: flex;
+    overflow-x: scroll;
+    gap: 10px;
+    padding: 5px 0px;
+}

@@ -14,12 +14,11 @@ interface TypeRouteBtnProps{
 
 const TypeRouteButton: React.FC<TypeRouteBtnProps> = ({icon, alt, content, onClick, isActive}) => {
     const theme = useContext(ThemeContext);
-    const style: string = `iconBtn`;
 
     return(
-        <div className={styleTheme.theme} onClick={onClick}>
+        <div className={[styles.btnTypeRoute, isActive?styleTheme.activeColor:styleTheme[theme]].join(' ')} onClick={onClick}>
             <img src={icon} alt={alt!=null?alt:'pic'}/>
-            <p className={styleTheme.theme}>{content}</p>
+            <p className={[styles.btnTypeRouteText, isActive?styleTheme.activeColorText:styles.default].join(' ')}>{content}</p>
         </div>
     )
 }

@@ -1,0 +1,59 @@
+.wrap_card_recently{
+    border-radius: 15px;
+    border: 1px solid #363E4B;
+    display: flex;
+    padding: 10px 15px;
+    width: 375px;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.wrap_content_recently{
+    display: flex;
+    gap: 15px;
+}
+
+.light_color_primary{
+    color: #1A1D24;
+}
+
+.dark_color_primary{
+    color: #FFF;
+}
+
+.color_secondary{
+    color: #A7B0BF;
+}
+
+.title_recently{
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.content_recently{
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 300;
+}
+
+.wrapDelete{
+    border-radius: 10px;
+    background: #363E4B;
+    padding: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+}
+
+.wrapDelete:hover{
+    background: #272d36;
+}
+
+.wrapDelete:active{
+    background: #14171b;
+}

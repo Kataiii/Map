@@ -2,6 +2,18 @@
   text-align: center;
 }
 
+p{
+  background-color: #03378600;
+}
+
+p:hover{
+  background-color: #03378600;
+}
+
+p:active{
+  background-color: #03378600;
+}
+
 .light{
   background-color: #fff;
   color: #1A1D24;
@@ -26,4 +38,20 @@
 
 .dark:active{
   background-color: #191c22;
+}
+
+.activeColor{
+  background-color: #0450C0;
+}
+
+.activeColorText{
+  color: #fff;
+}
+
+.activeColor:hover{
+  background: #0449b1;
+}
+
+.activeColor:active{
+  background: #033886;
 }
