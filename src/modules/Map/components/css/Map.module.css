@@ -2,3 +2,15 @@
     width: 100%;
     min-height: 100vh;
 }
+
+.formBtn{
+    width: 55px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 66px;
+    right: 38px;
+    border-radius: 15px;
+}
