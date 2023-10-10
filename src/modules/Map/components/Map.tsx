@@ -7,6 +7,7 @@ import { useState, useEffect, useRef } from "react";
 import IconLocation from '../../../assets/icon-location.svg';
 import { log } from 'console';
 import GeolocationBtn from './GeolocationBtn';
+import ymaps from 'yandex-maps';
 
 const MapComponent = () => {
     const { latitude, longitude, error } = usePosition();
@@ -26,6 +27,8 @@ const MapComponent = () => {
 
     const clickHandle = () => {
         console.log(mapRef.current?.controls);
+        console.log(ymaps.geolocation.get());
+        
         //Тут должен быть вызов той кнопки
         // let geolocationControl: ymaps.IControl | null | undefined = mapRef.current?.controls.get('geolocationControl');
         // geolocationControl && geolocationControl.events.add('locationchange', function(event){
