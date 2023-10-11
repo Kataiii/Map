@@ -16,7 +16,7 @@ const items: TabsProps['items'] = [
   },
   {
     key: '2',
-    label: 'Tab 2',
+    label: 'State (Субъекты)',
     children: 'Content of Tab Pane 2',
   },
   {

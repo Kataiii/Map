@@ -1,0 +1,7 @@
+.main_wrap{
+    display: flex;
+    padding: 20px 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}

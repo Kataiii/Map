@@ -45,3 +45,29 @@
 .default{
     color: #A7B0BF;
 }
+
+.dark_theme{
+    background-color: #363E4B;
+    color: #A7B0BF;
+}
+
+.light_theme{
+    background-color: #F4F7FA;
+    color: #363E4B;
+}
+
+.btn_text{
+    border-radius: 15px;
+    display: inline-flex;
+    padding: 17px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.btn_text_content{
+    text-align: center;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+}

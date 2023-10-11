@@ -6,15 +6,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-*::-webkit-scrollbar {
+/* *::-webkit-scrollbar {
   width: 40px;               /* ширина scrollbar */
-}
-*::-webkit-scrollbar-track {
+/* } */
+/* *::-webkit-scrollbar-track {
   background: #1A1D24;        /* цвет дорожки */
-}
-*::-webkit-scrollbar-thumb {
+/* } */
+/* *::-webkit-scrollbar-thumb {
   background-color: #363E4B;
-  width: 1px;    /* цвет плашки */
-  border-radius: 20px;       /* закругления плашки */
-  border: 5px solid #1A1D24;  /* padding вокруг плашки */
-}
+  width: 1px;    цвет плашки */
+  /* border-radius: 20px;       /* закругления плашки */
+  /* border: 5px solid #1A1D24;  padding вокруг плашки */
+/* }  */
