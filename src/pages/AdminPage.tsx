@@ -3,6 +3,7 @@ import axios from "axios";
 import { Tabs } from 'antd';
 import type { TabsProps } from 'antd';
 import CountryModule from "../modules/AdminModules/Countries/CountryModule";
+import StateModule from "../modules/AdminModules/States/StateModule";
 
 const onChange = (key: string) => {
   console.log(key);
@@ -17,7 +18,7 @@ const items: TabsProps['items'] = [
   {
     key: '2',
     label: 'State (Субъекты)',
-    children: 'Content of Tab Pane 2',
+    children: <StateModule/>,
   },
   {
     key: '3',

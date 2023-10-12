@@ -8,14 +8,15 @@ import { ThemeContext } from '..';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styles from '../App.module.css';
 import Delete from '../assets/icon-delete-white.svg';
-import ymaps from 'yandex-maps';
-
 
 const MapPage = () => {
   const [visible, setVisible] = useState<boolean>(false);
   const theme = useContext(ThemeContext);
   const location = useLocation();
   const navigate = useNavigate();
+
+  
+
 
   useEffect(() => {
     if(location.pathname !== '/'){

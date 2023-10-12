@@ -33,11 +33,11 @@ export const countryAPI = createApi({
             }),
             invalidatesTags: ['Country']
         }),
-        deleteCountry: build.mutation<ICountry, ICountry>({
-            query: (country) => ({
-                url: `/deleteCountryById${country.id}`,
+        deleteCountry: build.mutation<number, number>({
+            query: (id) => ({
+                url: `/deleteCountryById?id=${id}`,
                 method: 'DELETE',
-                body: country
+                body: id
             }),
             invalidatesTags: ['Country']
         })
