@@ -5,8 +5,8 @@ import { Form, Input, Popconfirm, Table } from 'antd';
 import type { FormInstance } from 'antd/es/form';
 import PrimaryButtom from "../../../ui/buttons/PrimaryButton";
 import { IState, IStateNameCountry } from "../../../entities/State";
-import { ICountry } from "../../../entities/Country";
 import { stateAPI } from "../../../services/StatesService";
+import styles from '../../css/Module.module.css';
 
 const EditableContext = React.createContext<FormInstance<any> | null>(null);
 
@@ -106,7 +106,7 @@ type EditableTableProps = Parameters<typeof Table>[0];
 interface DataType {
   id: number;
   name: string;
-  countryId: number;
+  countryName: string;
 }
 
 type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
@@ -117,7 +117,7 @@ const StateModule: React.FC = () => {
 
     const [name, setName] = useState<string>('');
     const [statesWithCOuntryName, setStatesWithCOuntryName] = useState<IStateNameCountry[]>([]);
-    const [isLoading, setIsLoanding] = useState<boolean>(false);
+    const [isLoading, setIsLoanding] = useState<boolean>(true);
 
     const [createState, {}] = stateAPI.useCreateStatesMutation();
     const [updateState, {}] = stateAPI.useUpdateStateMutation();
@@ -125,12 +125,17 @@ const StateModule: React.FC = () => {
 
 
     useEffect(() => {
-        const result: IStateNameCountry[] | undefined = states?.map( state => ( { id: state.id, name: state.name,  countryName: countries?.find(item => item.id == state.countryId)?.name} as IStateNameCountry ) );
-        if(result !== undefined){
-            setStatesWithCOuntryName(result);
-            setIsLoanding(true);
-        }
-    }, [])
+        createData();
+    }, [isLoandingCountry, isLoandingState, states])
+
+  const createData = () => {
+    const result: IStateNameCountry[] | undefined = states?.map( state => ( { id: state.id, name: state.name,  countryName: countries?.find(item => item.id == state.countryId)?.name} as IStateNameCountry ) );
+    console.log(result);
+    if(result !== undefined){
+        setStatesWithCOuntryName(result);
+        setIsLoanding(false);
+    }
+  }
 
   const handleDelete = (key: React.Key) => {
     const state: IState | undefined = states?.find(state => state.id == key);
@@ -161,14 +166,18 @@ const StateModule: React.FC = () => {
       sortDirections: ['descend', 'ascend']
     },
     {
-        title: 'countryId',
-        dataIndex: 'countryId',
+        title: 'country name',
+        dataIndex: 'countryName',
         editable: true,
         sorter: (a, b) => {
-            if(a.countryId < b.countryId) return -1;
-            if(a.countryId > b.countryId) return 1;
+            if (a.name.toLowerCase() < b.name.toLowerCase()) {
+              return -1;
+            }
+            if (a.name.toLowerCase() > b.name.toLowerCase()) {
+              return 1;
+            }
             return 0;
-        }
+          },
     },
     {
       title: 'operation',
@@ -184,7 +193,9 @@ const StateModule: React.FC = () => {
   ];
 
   const handleSave = (row: DataType) => {
-    updateState(row);
+    console.log(row);
+    const id = countries?.find(country => country.name == row.countryName)?.id || 1;
+    updateState({id: row.id, name: row.name, countryId: id});
   };
 
   const components = {
@@ -219,21 +230,27 @@ const StateModule: React.FC = () => {
   }
 
   return (
-    <div>
-        <h1>State Module</h1>
+    <div className={styles.wrap}>
+        <h1>Субъекты</h1>
         <div>
             <input onChange={changeHandler} type={'text'} placeholder='Название области'/>
             <PrimaryButtom content={"Добавить область"} onClick={clickHandler}/>
         </div>
-        { isLoading && <h1>Идет загрузка</h1>}
+
         { error && <h1>Произошла ошибка при загрузке</h1>}
-      <Table
-        components={components}
-        rowClassName={() => 'editable-row'}
-        bordered
-        dataSource={states}
-        columns={columns as ColumnTypes}
-      />
+        { isLoading 
+            ?
+                <h1>Идет загрузка</h1>
+            :
+                <Table
+                components={components}
+                rowClassName={() => 'editable-row'}
+                bordered
+                dataSource={statesWithCOuntryName}
+                columns={columns as ColumnTypes}
+          />
+          }
+
     </div>
   );
 };

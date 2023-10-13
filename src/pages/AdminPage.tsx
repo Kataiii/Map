@@ -5,7 +5,6 @@ import StateModule from "../modules/AdminModules/States/StateModule";
 import styles from './css/AdminPage.module.css';
 import { useContext } from 'react';
 import { ThemeContext } from '..';
-import StateModuleUp from '../modules/AdminModules/States/StateModuleUp';
 
 const onChange = (key: string) => {
   console.log(key);
@@ -25,7 +24,7 @@ const items: TabsProps['items'] = [
   {
     key: '3',
     label: 'Tab 3',
-    children: <StateModuleUp/>,
+    // children: <StateModuleUp/>,
   },
 ];
 

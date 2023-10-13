@@ -8,6 +8,7 @@ import PrimaryButtom from "../../../ui/buttons/PrimaryButton";
 import styles from '../../css/Module.module.css';
 import { ThemeContext } from "../../..";
 
+
 const EditableContext = React.createContext<FormInstance<any> | null>(null);
 
 interface Item {
@@ -194,16 +195,21 @@ const CountryModule: React.FC = () => {
 
   const clickHandler = () => {
     createCountry([{id:0, name:name}]);
+    setName('');
   }
 
   const theme = useContext(ThemeContext);
 
   return (
-    <div>
-        <h1 className={[styles[theme], styles.title].join(' ')}>Country Module</h1>
-        <div>
-            <input onChange={changeHandler} type={'text'} placeholder='Название страны'/>
-            <PrimaryButtom content={"Добавить страну"} onClick={clickHandler}/>
+    <div className={styles.wrap}>
+        <h1 className={[styles[theme], styles.title].join(' ')}>Страны</h1>
+        <div className={styles.form_wrap}>
+            <div className={[styles[`${theme}_back`], styles.input_wrap].join(' ')}>
+              <input className={[styles[theme], styles.input].join(' ')} onChange={changeHandler} type={'text'} placeholder='Название страны'/>
+            </div>
+            <div className={styles.wrap_button}>
+              <PrimaryButtom content={"ОК"} onClick={clickHandler}/>
+            </div>
         </div>
         { isLoading && <h1>Идет загрузка</h1>}
         { error && <h1>Произошла ошибка при загрузке</h1>}
