@@ -1,5 +1,11 @@
 export interface IState{
     id: number;
     name: string;
-    country_id: number;
+    countryId: number;
+}
+
+export interface IStateNameCountry{
+    id: number;
+    name: string;
+    countryName: string;
 }

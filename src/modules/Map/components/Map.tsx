@@ -26,22 +26,11 @@ const MapComponent = () => {
     const clickHandle = () => {
         const geo = mapRef.current?.controls.get('geolocation');
         console.log(geo);
-        // let geolocationControl: ymaps.IControl | null | undefined = mapRef.current?.controls.get('geolocationControl');
-        // const geoControl = mapRef.current?.controls.get('geolocationControl');
-        //@ts-ignore
-        // geolocationControl.options = {visible: false}
-        // console.log(geolocationControl);
-        // geolocationControl?.events.add('locationchange', function (event) {
-        //     let position: number[] = event.get('position');
-        //     console.log(position);
-        // });
-        // geolocationControl?.events.add('click', (event) => {
-        //     console.log(event);
-        //     console.log(geolocationControl);
-        //     console.log('что-то было');
-        // })
-        // geolocationControl?.events.fire('click');
     }
+
+    useEffect(() => {
+        
+    })
 
     return (
         <div>

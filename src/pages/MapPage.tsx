@@ -8,6 +8,11 @@ import { ThemeContext } from '..';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styles from '../App.module.css';
 import Delete from '../assets/icon-delete-white.svg';
+import React from 'react';
+import * as ymaps3 from 'ymaps3';
+//@ts-ignore
+const reactify = ymaps3.reactify.bindTo(React, ReactDOM);
+const {YMap} = reactify.module(ymaps3);
 
 const MapPage = () => {
   const [visible, setVisible] = useState<boolean>(false);
@@ -37,7 +42,7 @@ const MapPage = () => {
             apikey: '29e64032-86a4-4346-97ad-7f1d1eec4ae2',
         }}>
             <div>
-               <MapComponent/>
+               {/* <MapComponent/> */}
             </div>
         </YMaps>
         {/* <div className={[styles[`${theme}_background`], styles.main_board].join(' ')}>

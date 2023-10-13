@@ -6,28 +6,32 @@ import MainPage from "../pages/MainPage";
 import NavigationPage from "../pages/NavigationPage";
 
 const Router = createBrowserRouter([
+    // {
+    //   path: "/",
+    //   element: <App/>,
+    //   children: [
+    //     {
+    //         path: '/',
+    //         element: <MainPage />,
+    //     },
+    //     {
+    //         path: '/departament/:id',
+    //         element: <InformationPage/>
+    //     },
+    //     {
+    //         path: '/navigation',
+    //         element: <NavigationPage/>
+    //     }
+    //   ]
+    // },
+    // {
+    //     path: '/admin',
+    //     element: <AdminPage/>
+    // }
     {
-      path: "/",
-      element: <App/>,
-      children: [
-        {
-            path: '/',
-            element: <MainPage />,
-        },
-        {
-            path: '/departament/:id',
-            element: <InformationPage/>
-        },
-        {
-            path: '/navigation',
-            element: <NavigationPage/>
-        }
-      ]
-    },
-    {
-        path: '/admin',
-        element: <AdminPage/>
-    }
+      path: '/',
+      element: <AdminPage/>
+  }
   ]);
 
 export default Router;
