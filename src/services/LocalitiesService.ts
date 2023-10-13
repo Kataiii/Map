@@ -34,7 +34,7 @@ export const localityAPI = createApi({
         }),
         deleteLocality: build.mutation<number, number>({
             query: (locality_id) => ({
-                url: `/deleteStateById${locality_id}`,
+                url: `/deleteStateById?id=${locality_id}`,
                 method: 'DELETE',
                 body: locality_id
             }),

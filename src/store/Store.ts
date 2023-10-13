@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
 const setupStore = () => {
     return configureStore({
         reducer: rootReducer,
-        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(countryAPI.middleware, stateAPI.middleware)
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(countryAPI.middleware, stateAPI.middleware, localityAPI.middleware)
     });
 }
 
