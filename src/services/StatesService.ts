@@ -34,7 +34,7 @@ export const stateAPI = createApi({
         }),
         deleteState: build.mutation<number, number>({
             query: (state_id) => ({
-                url: `/deleteStateById${state_id}`,
+                url: `/deleteStateById?id=${state_id}`,
                 method: 'DELETE',
                 body: state_id
             }),

@@ -1,0 +1,12 @@
+.dark{
+    background-color: #363E4B;
+}
+
+.light{
+    background-color: #F4F7FA;
+}
+
+.wrap_main{
+    min-height: 100vh;
+    padding: 0 40px;
+}

@@ -1,11 +1,13 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { countryAPI } from "../services/CountriesService";
+import { localityAPI } from "../services/LocalitiesService";
 import { stateAPI } from "../services/StatesService";
 
 const rootReducer = combineReducers({
     [countryAPI.reducerPath] : countryAPI.reducer,
-    [stateAPI.reducerPath]: stateAPI.reducer
+    [stateAPI.reducerPath]: stateAPI.reducer,
+    [localityAPI.reducerPath]: localityAPI.reducer
 });
 
 const setupStore = () => {

@@ -3,16 +3,16 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import type { InputRef } from 'antd';
 import { Form, Input, Popconfirm, Table } from 'antd';
 import type { FormInstance } from 'antd/es/form';
-import { ICountry } from "../../../entities/Country";
 import PrimaryButtom from "../../../ui/buttons/PrimaryButton";
-import styles from '../../css/Module.module.css';
-import { ThemeContext } from "../../..";
+import { IState, IStateNameCountry } from "../../../entities/State";
+import { stateAPI } from "../../../services/StatesService";
 
 const EditableContext = React.createContext<FormInstance<any> | null>(null);
 
 interface Item {
   id: number;
   name: string;
+  countryId: number;
 }
 
 interface EditableRowProps {
@@ -105,21 +105,41 @@ type EditableTableProps = Parameters<typeof Table>[0];
 interface DataType {
   id: number;
   name: string;
+  countryName: string;
 }
 
 type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
 
-const CountryModule: React.FC = () => {
-  const [name, setName] = useState<string>('');
-  const {data: countries, error, isLoading} = countryAPI.useFetchAllCountriesQuery(10);
-  const [createCountry, {}] = countryAPI.useCreateCountriesMutation();
-  const [deleteCountry, {}] = countryAPI.useDeleteCountryMutation();
-  const [updateCountry, {}] = countryAPI.useUpdateCountryMutation();
+const StateModuleUp: React.FC = () => {
+    const {data: states, error, isLoading: isLoandingState} = stateAPI.useFetchAllStatesQuery(10);
+    const {data: countries, error: errorCountry, isLoading: isLoandingCountry} = countryAPI.useFetchAllCountriesQuery(100);
+
+    const [name, setName] = useState<string>('');
+    const [statesWithCOuntryName, setStatesWithCOuntryName] = useState<IStateNameCountry[]>([]);
+    const [isLoading, setIsLoanding] = useState<boolean>(true);
+
+    const [createState, {}] = stateAPI.useCreateStatesMutation();
+    const [updateState, {}] = stateAPI.useUpdateStateMutation();
+    const [deleteState, {}] = stateAPI.useDeleteStateMutation();
+
+
+    useEffect(() => {
+        createData();
+    }, [isLoandingCountry, isLoandingState, states])
+
+  const createData = () => {
+    const result: IStateNameCountry[] | undefined = states?.map( state => ( { id: state.id, name: state.name,  countryName: countries?.find(item => item.id == state.countryId)?.name} as IStateNameCountry ) );
+    console.log(result);
+    if(result !== undefined){
+        setStatesWithCOuntryName(result);
+        setIsLoanding(false);
+    }
+  }
 
   const handleDelete = (key: React.Key) => {
-    const country: ICountry | undefined = countries?.find(country => country.id == key);
-    if(country !== undefined){
-        deleteCountry(country.id);
+    const state: IState | undefined = states?.find(state => state.id == key);
+    if(state !== undefined){
+        deleteState(state.id);
     }
   };
 
@@ -127,15 +147,12 @@ const CountryModule: React.FC = () => {
     {
       title: '№',
       dataIndex: 'id',
-      width: '30%',
       editable: false
     },
     {
       title: 'name',
       dataIndex: 'name',
-      width: '30%',
       editable: true,
-    //   sorter: (a, b) => a.name.length - b.name.length,
       sorter: (a, b) => {
         if (a.name.toLowerCase() < b.name.toLowerCase()) {
           return -1;
@@ -148,12 +165,25 @@ const CountryModule: React.FC = () => {
       sortDirections: ['descend', 'ascend']
     },
     {
+        title: 'country name',
+        dataIndex: 'countryName',
+        editable: true,
+        sorter: (a, b) => {
+            if (a.name.toLowerCase() < b.name.toLowerCase()) {
+              return -1;
+            }
+            if (a.name.toLowerCase() > b.name.toLowerCase()) {
+              return 1;
+            }
+            return 0;
+          },
+    },
+    {
       title: 'operation',
       dataIndex: 'operation',
-      width: '30%',
       //@ts-ignore
       render: (_, record: { id: number }) =>
-        countries && countries.length >= 1 ? (
+        states && states.length >= 1 ? (
           <Popconfirm title="Действительно хотите удалить?" onConfirm={() => handleDelete(record.id)}>
             <a>Удалить</a>
           </Popconfirm>
@@ -162,7 +192,9 @@ const CountryModule: React.FC = () => {
   ];
 
   const handleSave = (row: DataType) => {
-    updateCountry(row);
+    console.log(row);
+    const id = countries?.find(country => country.name == row.countryName)?.id || 1;
+    updateState({id: row.id, name: row.name, countryId: id});
   };
 
   const components = {
@@ -193,29 +225,33 @@ const CountryModule: React.FC = () => {
   }
 
   const clickHandler = () => {
-    createCountry([{id:0, name:name}]);
+    createState([{id:0, name:name, countryId: 1}]);
   }
-
-  const theme = useContext(ThemeContext);
 
   return (
     <div>
-        <h1 className={[styles[theme], styles.title].join(' ')}>Country Module</h1>
+        <h1>Субъекты</h1>
         <div>
-            <input onChange={changeHandler} type={'text'} placeholder='Название страны'/>
-            <PrimaryButtom content={"Добавить страну"} onClick={clickHandler}/>
+            <input onChange={changeHandler} type={'text'} placeholder='Название области'/>
+            <PrimaryButtom content={"Добавить область"} onClick={clickHandler}/>
         </div>
-        { isLoading && <h1>Идет загрузка</h1>}
+
         { error && <h1>Произошла ошибка при загрузке</h1>}
-      <Table
-        components={components}
-        rowClassName={() => 'editable-row'}
-        bordered
-        dataSource={countries}
-        columns={columns as ColumnTypes}
-      />
+        { isLoading 
+            ?
+                <h1>Идет загрузка</h1>
+            :
+                <Table
+                components={components}
+                rowClassName={() => 'editable-row'}
+                bordered
+                dataSource={statesWithCOuntryName}
+                columns={columns as ColumnTypes}
+          />
+          }
+
     </div>
   );
 };
 
-export default CountryModule;
+export default StateModuleUp;

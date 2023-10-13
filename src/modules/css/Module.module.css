@@ -1,0 +1,14 @@
+.title{
+    font-family: "VTBGroupUI";
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.dark{
+    color: #FFF;
+}
+
+.light{
+    color: #1A1D24;
+}

@@ -1,5 +1,4 @@
 import TypesNavigation from '../modules/Navigation/components/TypesNavigation';
-import { departaments } from '../entities/Departament';
 import FavouritesCard from '../ui/cards/FavouritesCard';
 import { YMaps } from '@pbe/react-yandex-maps';
 import MapComponent from '../modules/Map/components/Map';

@@ -19,7 +19,7 @@ const RecentlyFoundCard: React.FC<RecentlyFoundCardProps> = ({departament, click
             <div className={styles.wrap_content_recently}>
                 <img src={Hours}/>
                 <div>
-                    <p className={[styles[`${theme}_color_primary`],styles.title_recently].join(' ')}>{departament.isBank?'Отделение банка':'Банкомат'}</p>
+                    {/* <p className={[styles[`${theme}_color_primary`],styles.title_recently].join(' ')}>{departament.isBank?'Отделение банка':'Банкомат'}</p> */}
                     <p className={[styles.color_secondary,styles.content_recently].join(' ')}>{departament.address}</p>
                 </div>
             </div>

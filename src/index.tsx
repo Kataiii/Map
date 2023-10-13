@@ -7,6 +7,10 @@ import { Theme } from './entities/Theme';
 import './index.css';
 import Router from './routing/Router';
 import { store } from './store/Store';
+import './fonts/VTBGroupUI-Bold.otf';
+import './fonts/VTBGroupUI-Light.otf';
+import './fonts/VTBGroupUI-Medium.otf';
+import './fonts/VTBGroupUI-Regular.otf';
 
 export const ThemeContext = createContext<Theme>(Theme.light);
 
