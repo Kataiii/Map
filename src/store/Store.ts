@@ -1,19 +1,29 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import { atmAPI } from "../services/ATMsService";
 import { countryAPI } from "../services/CountriesService";
+import { departamentAPI } from "../services/DepartamentsSetvice";
 import { localityAPI } from "../services/LocalitiesService";
 import { stateAPI } from "../services/StatesService";
 
 const rootReducer = combineReducers({
     [countryAPI.reducerPath] : countryAPI.reducer,
     [stateAPI.reducerPath]: stateAPI.reducer,
-    [localityAPI.reducerPath]: localityAPI.reducer
+    [localityAPI.reducerPath]: localityAPI.reducer,
+    [departamentAPI.reducerPath]: departamentAPI.reducer,
+    [atmAPI.reducerPath]: atmAPI.reducer
 });
 
 const setupStore = () => {
     return configureStore({
         reducer: rootReducer,
-        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(countryAPI.middleware, stateAPI.middleware, localityAPI.middleware)
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
+            countryAPI.middleware, 
+            stateAPI.middleware, 
+            localityAPI.middleware,
+            departamentAPI.middleware,
+            atmAPI.middleware
+        )
     });
 }
 

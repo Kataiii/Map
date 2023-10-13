@@ -10,3 +10,10 @@
     min-height: 100vh;
     padding: 0 40px;
 }
+
+.wrap_route{
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    padding-top: 55px;
+}

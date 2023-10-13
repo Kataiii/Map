@@ -1,21 +1,21 @@
-import { countryAPI } from "../../../services/CountriesService";
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import type { InputRef } from 'antd';
 import { Form, Input, Popconfirm, Table } from 'antd';
 import type { FormInstance } from 'antd/es/form';
 import PrimaryButtom from "../../../ui/buttons/PrimaryButton";
-import { IState, IStateNameCountry } from "../../../entities/State";
-import { stateAPI } from "../../../services/StatesService";
 import styles from '../../css/Module.module.css';
 import { localityAPI } from "../../../services/LocalitiesService";
 import { ILocality, ILocalityNameState } from "../../../entities/Locality";
+import { departamentAPI } from "../../../services/DepartamentsSetvice";
+import { IDepartament, IDepartamentWithLocality } from '../../../entities/Departament';
 
 const EditableContext = React.createContext<FormInstance<any> | null>(null);
 
 interface Item {
   id: number;
-  name: string;
-  stateId: number;
+  sale_point_name: string;
+  address: string;
+  localityId: number;
 }
 
 interface EditableRowProps {
@@ -106,51 +106,52 @@ type EditableTableProps = Parameters<typeof Table>[0];
 
 interface DataType {
   id: number;
-  name: string;
-  stateName: string;
+  sale_point_name: string;
+  address: string;
+  localityName: string;
 }
 
 type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
 
-const LocalityModule: React.FC = () => {
+const DepartamentModule: React.FC = () => {
 
-    const {data: states, error, isLoading: isLoandingState} = stateAPI.useFetchAllStatesQuery(10);
+    const {data: departaments, error, isLoading: isLoandingDepartament} = departamentAPI.useFetchAllDepartaQuery(20);
     const {data: localities, error: errorLocality, isLoading: isLoandingLocality} = localityAPI.useFetchAllLocalitiesQuery(10);
 
     const [name, setName] = useState<string>('');
-    const [localitiesWithStateName, setLocalitiesWithStateName] = useState<ILocalityNameState[]>([]);
+    const [departamentsWithLocalityName, setDepartamentsWithLocalityName] = useState<IDepartamentWithLocality[]>([]);
     const [isLoading, setIsLoanding] = useState<boolean>(true);
 
-    const [createLocality, {}] = localityAPI.useCreateLocalitiesMutation();
-    const [updateLocality, {}] = localityAPI.useUpdateLocalityMutation();
-    const [deleteLocality, {}] = localityAPI.useDeleteLocalityMutation();
+    const [createDepartament, {}] = departamentAPI.useCreateDepartamentsMutation();
+    const [updateDepartament, {}] = departamentAPI.useUpdateDepartamentMutation();
+    const [deleteDepartament, {}] = departamentAPI.useDeleteDepartamentMutation();
 
 
     useEffect(() => {
         createData();
-    }, [isLoandingLocality, isLoandingState, localities])
+    }, [isLoandingLocality, isLoandingDepartament, departaments])
 
   const createData = () => {
-    const result: ILocalityNameState[] | undefined = localities?.map( locality => ( 
+    const result: IDepartamentWithLocality[] | undefined = departaments?.map( departament => ( 
         {
-            id: locality.id,
-            name: locality.name,
-            stateName: states?.find(item => item.id == locality.stateId)?.name
-        } as ILocalityNameState
+            id: departament.id,
+            sale_point_name: departament.sale_point_format,
+            address: departament.address,
+            localityName: localities?.find(item => item.id == departament.locality_id)?.name
+        } as IDepartamentWithLocality
     ) );
     console.log(result);
     if(result !== undefined){
         console.log(localities);
-        console.log(states);
-        setLocalitiesWithStateName(result);
+        setDepartamentsWithLocalityName(result);
         setIsLoanding(false);
     }
   }
 
   const handleDelete = (key: React.Key) => {
-    const locality: ILocality | undefined = localities?.find(locality => locality.id == key);
-    if(locality !== undefined){
-        deleteLocality(locality.id);
+    const departament: IDepartament | undefined = departaments?.find(departament => departament.id == key);
+    if(departament !== undefined){
+        deleteDepartament(departament.id);
     }
   };
 
@@ -162,7 +163,7 @@ const LocalityModule: React.FC = () => {
     },
     {
       title: 'name',
-      dataIndex: 'name',
+      dataIndex: 'sale_point_name',
       editable: true,
       sorter: (a, b) => {
         if (a.name.toLowerCase() < b.name.toLowerCase()) {
@@ -176,14 +177,28 @@ const LocalityModule: React.FC = () => {
       sortDirections: ['descend', 'ascend']
     },
     {
-        title: 'state name',
-        dataIndex: 'stateName',
+        title: 'address',
+        dataIndex: 'address',
         editable: true,
         sorter: (a, b) => {
-            if (a.stateName.toLowerCase() < b.stateName.toLowerCase()) {
+            if (a.address.toLowerCase() < b.address.toLowerCase()) {
               return -1;
             }
-            if (a.stateName.toLowerCase() > b.stateName.toLowerCase()) {
+            if (a.address.toLowerCase() > b.address.toLowerCase()) {
+              return 1;
+            }
+            return 0;
+          },
+    },
+    {
+        title: 'locality name',
+        dataIndex: 'localityName',
+        editable: true,
+        sorter: (a, b) => {
+            if (a.localityName.toLowerCase() < b.localityName.toLowerCase()) {
+              return -1;
+            }
+            if (a.localityName.toLowerCase() > b.localityName.toLowerCase()) {
               return 1;
             }
             return 0;
@@ -194,7 +209,7 @@ const LocalityModule: React.FC = () => {
       dataIndex: 'operation',
       //@ts-ignore
       render: (_, record: { id: number }) =>
-        localities && localities.length >= 1 ? (
+        departaments && departaments.length >= 1 ? (
           <Popconfirm title="Действительно хотите удалить?" onConfirm={() => handleDelete(record.id)}>
             <a>Удалить</a>
           </Popconfirm>
@@ -204,8 +219,28 @@ const LocalityModule: React.FC = () => {
 
   const handleSave = (row: DataType) => {
     console.log(row);
-    const id = states?.find(state => state.name == row.stateName)?.id || 1;
-    updateLocality({id: row.id, name: row.name, stateId: id});
+    const departament = departaments?.find(departament => departament.id === row.id)
+    const id = localities?.find(locality => locality.name == row.localityName)?.id || 1;
+    updateDepartament(
+        {
+            id: row.id, 
+            name: departament?.name,
+            workDaysUrId: departament?.workDaysUrId,
+            workDaysFizId: departament?.workDaysUrId,
+            address: departament?.address,
+            coord_x: departament?.coord_x,
+            coord_y: departament?.coord_y,
+            postcode: departament?.postcode,
+            description: departament?.description,
+            phone: departament?.phone,
+            office_type: departament?.office_type,
+            sale_point_format: departament?.sale_point_format,
+            suo_availability: departament?.suo_availability,
+            has_ramp: departament?.has_ramp,
+            kep: departament?.kep,
+            myBranch: departament?.myBranch,
+            locality_id: id
+        });
   };
 
   const components = {
@@ -231,21 +266,41 @@ const LocalityModule: React.FC = () => {
     };
   });
 
-  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  }
+//   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     setName(e.target.value);
+//   }
 
   const clickHandler = () => {
-        //TODO create
-    createLocality([{id:0, name:name, stateId: 1}]);
+    //TODO create
+    // createDepartament([
+    //     {
+    //         id: row.id, 
+    //         name: departament?.name,
+    //         work_days_ur_id: departament?.work_days_ur_id,
+    //         work_days_fiz_id: departament?.work_days_fiz_id,
+    //         address: departament?.address,
+    //         coord_x: departament?.coord_x,
+    //         coord_y: departament?.coord_y,
+    //         postcode: departament?.postcode,
+    //         description: departament?.description,
+    //         phone: departament?.phone,
+    //         office_type: departament?.office_type,
+    //         sale_point_format: departament?.sale_point_format,
+    //         suo_availability: departament?.suo_availability,
+    //         has_ramp: departament?.has_ramp,
+    //         kep: departament?.kep,
+    //         myBranch: departament?.myBranch,
+    //         locality_id: id
+    //     }
+    // ]);
   }
 
   return (
     <div className={styles.wrap}>
-        <h1>Города</h1>
+        <h1>Офисы</h1>
         <div>
-            <input onChange={changeHandler} type={'text'} placeholder='Название города'/>
-            <PrimaryButtom content={"Добавить город"} onClick={clickHandler}/>
+            {/* <input onChange={changeHandler} type={'text'} placeholder='Название города'/> */}
+            <PrimaryButtom content={"Добавить департамент"} onClick={clickHandler}/>
         </div>
 
         { error && <h1>Произошла ошибка при загрузке</h1>}
@@ -257,7 +312,7 @@ const LocalityModule: React.FC = () => {
                 components={components}
                 rowClassName={() => 'editable-row'}
                 bordered
-                dataSource={localitiesWithStateName}
+                dataSource={departamentsWithLocalityName}
                 columns={columns as ColumnTypes}
           />
           }
@@ -266,4 +321,4 @@ const LocalityModule: React.FC = () => {
   );
 };
 
-export default LocalityModule;
+export default DepartamentModule;

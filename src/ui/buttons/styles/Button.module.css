@@ -71,3 +71,69 @@
     font-style: normal;
     font-weight: 500;
 }
+
+.dark_button{
+    background-color: #1A1D24;
+}
+
+.dark_button:hover{
+    background-color: #232831;
+}
+
+.dark_button:active{
+    background-color: #303642;
+}
+
+.light_button{
+    background-color: #F4F7FA;
+}
+
+.light_button:hover{
+    background-color: #e0e3e6;
+}
+
+.light_button:hover{
+    background-color: #b8babd;
+}
+
+.route_panel{
+    border-radius: 15px;
+    border: 1px solid #363E4B;
+    display: flex;
+    justify-content: center;
+    padding: 17px 25px;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.dark_button_content{
+    color: #A7B0BF;
+}
+
+.light_button_content{
+    color: #363E4B ;
+}
+
+.route_panel_content{
+    text-align: center;
+    font-family: "VTBGroupUI";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.primary_btn{
+    background: #0450C0;
+}
+
+.primary_btn:hover{
+    background: #0448af;
+}
+
+.primary_btn:active{
+    background: #033580;
+}
+
+.primary_btn_content{
+    color: #FFF;
+}

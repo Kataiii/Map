@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IDepartament } from "../entities/Departament";
 import { API_URL } from "../http";
 
@@ -32,11 +32,11 @@ export const departamentAPI = createApi({
             }),
             invalidatesTags: ['Departament']
         }),
-        deleteState: build.mutation<IDepartament, IDepartament>({
-            query: (departament) => ({
-                url: `/deleteDepartamentById${departament.id}`,
+        deleteDepartament: build.mutation<number, number>({
+            query: (departament_id) => ({
+                url: `/deleteDepartamentById?id=${departament_id}`,
                 method: 'DELETE',
-                body: departament
+                body: departament_id
             }),
             invalidatesTags: ['Departament']
         })
