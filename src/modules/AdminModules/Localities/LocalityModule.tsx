@@ -1,14 +1,15 @@
 import { countryAPI } from "../../../services/CountriesService";
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import type { InputRef } from 'antd';
+import { InputRef, Select } from 'antd';
 import { Form, Input, Popconfirm, Table } from 'antd';
 import type { FormInstance } from 'antd/es/form';
 import PrimaryButtom from "../../../ui/buttons/PrimaryButton";
-import { IState, IStateNameCountry } from "../../../entities/State";
 import { stateAPI } from "../../../services/StatesService";
 import styles from '../../css/Module.module.css';
 import { localityAPI } from "../../../services/LocalitiesService";
 import { ILocality, ILocalityNameState } from "../../../entities/Locality";
+import { ThemeContext } from "../../..";
+
 
 const EditableContext = React.createContext<FormInstance<any> | null>(null);
 
@@ -118,6 +119,8 @@ const LocalityModule: React.FC = () => {
     const {data: localities, error: errorLocality, isLoading: isLoandingLocality} = localityAPI.useFetchAllLocalitiesQuery(10);
 
     const [name, setName] = useState<string>('');
+    const [idState, setIdState] = useState<number | undefined>();
+
     const [localitiesWithStateName, setLocalitiesWithStateName] = useState<ILocalityNameState[]>([]);
     const [isLoading, setIsLoanding] = useState<boolean>(true);
 
@@ -128,7 +131,7 @@ const LocalityModule: React.FC = () => {
 
     useEffect(() => {
         createData();
-    }, [isLoandingLocality, isLoandingState, localities])
+    }, [isLoandingLocality, isLoandingState, localities, idState])
 
   const createData = () => {
     const result: ILocalityNameState[] | undefined = localities?.map( locality => ( 
@@ -161,7 +164,7 @@ const LocalityModule: React.FC = () => {
       editable: false
     },
     {
-      title: 'name',
+      title: 'Название',
       dataIndex: 'name',
       editable: true,
       sorter: (a, b) => {
@@ -176,7 +179,7 @@ const LocalityModule: React.FC = () => {
       sortDirections: ['descend', 'ascend']
     },
     {
-        title: 'state name',
+        title: 'Название субъекта',
         dataIndex: 'stateName',
         editable: true,
         sorter: (a, b) => {
@@ -190,7 +193,7 @@ const LocalityModule: React.FC = () => {
           },
     },
     {
-      title: 'operation',
+      title: '',
       dataIndex: 'operation',
       //@ts-ignore
       render: (_, record: { id: number }) =>
@@ -236,16 +239,48 @@ const LocalityModule: React.FC = () => {
   }
 
   const clickHandler = () => {
-        //TODO create
-    createLocality([{id:0, name:name, stateId: 1}]);
+    if(idState != undefined){
+        createLocality([{id:0, name:name, stateId: idState}]);
+    }
   }
+
+
+  const onChange = (value: string) => {
+    setIdState(Number(value));
+  };
+  
+  const onSearch = (value: string) => {
+    console.log('search:', value);
+  };
+  
+  const filterOption = (input: string, option?: { label: string; value: string }) =>
+    (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
+
+  const theme = useContext(ThemeContext);
 
   return (
     <div className={styles.wrap}>
-        <h1>Города</h1>
-        <div>
-            <input onChange={changeHandler} type={'text'} placeholder='Название города'/>
-            <PrimaryButtom content={"Добавить город"} onClick={clickHandler}/>
+        <h1 className={[styles[theme], styles.title].join(' ')}>Города</h1>
+        <div className={styles.form_wrap}>
+            <div className={[styles[`${theme}_back`], styles.input_wrap].join(' ')}>
+              <input className={[styles[theme], styles.input].join(' ')} onChange={changeHandler} type={'text'} placeholder='Название города'/>
+            </div>
+
+            <Select
+              showSearch
+              placeholder="Выберите субъект"
+              optionFilterProp="children"
+              onChange={onChange}
+              onSearch={onSearch}
+              filterOption={filterOption}
+              options={
+              states?.map(item => ({value: item.id.toString(), label: item.name}))
+            }
+            />
+
+            <div className={styles.wrap_button}>
+              <PrimaryButtom content={"ОК"} onClick={clickHandler}/>
+            </div>
         </div>
 
         { error && <h1>Произошла ошибка при загрузке</h1>}

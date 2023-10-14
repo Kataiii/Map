@@ -31,6 +31,7 @@ root.render(
           fontFamily: 'VTBGroupUI',
           colorPrimary: '#0450C0',
           colorIcon: '#fff',
+          colorBgElevated: '#1A1D24'
         },
         components: {
           Table:{
@@ -45,7 +46,9 @@ root.render(
             clearBg: '#363E4B',
             selectorBg: '#363E4B',
             multipleItemBg: '#363E4B',
-            optionActiveBg: '#363E4B'
+            optionActiveBg: '#363E4B',
+            optionSelectedBg: '#0450C0',
+            optionSelectedColor: '#fff'
           }
         }
       }}>
