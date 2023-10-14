@@ -1,9 +1,10 @@
+import { IWorkDay, IWorkDayVTB } from "./WorkDay";
+
 export interface IDepartament{
     id: number;
-    locality_id?: number;
-    name?: string;
-    workDaysUrId?: number;
-    workDaysFizId?: number;
+    localityId?: number;
+    workDaysUrId?: IWorkDay;
+    workDaysFizId?: IWorkDay;
     address?: string;
     coord_x?: string;
     coord_y?: string;
@@ -23,4 +24,22 @@ export interface IDepartamentWithLocality{
     sale_point_name: string;
     address: string;
     localityName: string;
+}
+
+export interface IDepartamentVTB{
+    salePointName: string;
+    address:  string;
+    openHours: IWorkDayVTB[];
+    rko: string;
+    openHoursIndividual: IWorkDayVTB[];
+    officeType: string;
+    salePointFormat: string;
+    suoAvailability: string;
+    hasRamp: string;
+    latitude: number;
+    longitude: number;
+    metroStation: string | null;
+    distance: number;
+    kep: boolean;
+    myBranch: boolean;
 }

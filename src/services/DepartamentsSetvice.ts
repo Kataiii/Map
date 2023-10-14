@@ -5,11 +5,11 @@ import { API_URL } from "../http";
 export const departamentAPI = createApi({
     reducerPath: 'departamentAPI',
     tagTypes: ['Departament'],
-    baseQuery: fetchBaseQuery({baseUrl: `${API_URL}/departament`}),
+    baseQuery: fetchBaseQuery({baseUrl: `${API_URL}/department`}),
     endpoints: (build) => ({
         fetchAllDeparta: build.query<IDepartament[], number>({
             query: (limit: number = 5) => ({
-                url: '/getDepartament',
+                url: '/getDepartment',
                 params: {
                     _limit: limit
                 }

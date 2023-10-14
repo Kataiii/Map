@@ -3,7 +3,7 @@ import { IDepartament } from '../../../entities/Departament';
 import IconVTB from '../../../assets/icon-vtb.svg';
 
 
-const DepartamentPlaceMark: React.FC<IDepartament> = ({id, name, address }) => {
+const DepartamentPlaceMark: React.FC<IDepartament> = () => {
 
     return(
         // <Placemark

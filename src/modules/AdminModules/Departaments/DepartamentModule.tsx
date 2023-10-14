@@ -5,9 +5,10 @@ import type { FormInstance } from 'antd/es/form';
 import PrimaryButtom from "../../../ui/buttons/PrimaryButton";
 import styles from '../../css/Module.module.css';
 import { localityAPI } from "../../../services/LocalitiesService";
-import { ILocality, ILocalityNameState } from "../../../entities/Locality";
 import { departamentAPI } from "../../../services/DepartamentsSetvice";
 import { IDepartament, IDepartamentWithLocality } from '../../../entities/Departament';
+import { ThemeContext } from '../../..';
+
 
 const EditableContext = React.createContext<FormInstance<any> | null>(null);
 
@@ -137,9 +138,11 @@ const DepartamentModule: React.FC = () => {
             id: departament.id,
             sale_point_name: departament.sale_point_format,
             address: departament.address,
-            localityName: localities?.find(item => item.id == departament.locality_id)?.name
+            localityName: localities?.find(item => item.id == departament.localityId)?.name
+            // localityName: departament.localityId?.toString()
         } as IDepartamentWithLocality
     ) );
+    console.log('departaments');
     console.log(result);
     if(result !== undefined){
         console.log(localities);
@@ -162,7 +165,7 @@ const DepartamentModule: React.FC = () => {
       editable: false
     },
     {
-      title: 'name',
+      title: 'Название',
       dataIndex: 'sale_point_name',
       editable: true,
       sorter: (a, b) => {
@@ -177,7 +180,7 @@ const DepartamentModule: React.FC = () => {
       sortDirections: ['descend', 'ascend']
     },
     {
-        title: 'address',
+        title: 'Адрес',
         dataIndex: 'address',
         editable: true,
         sorter: (a, b) => {
@@ -191,7 +194,7 @@ const DepartamentModule: React.FC = () => {
           },
     },
     {
-        title: 'locality name',
+        title: 'Название города',
         dataIndex: 'localityName',
         editable: true,
         sorter: (a, b) => {
@@ -224,7 +227,6 @@ const DepartamentModule: React.FC = () => {
     updateDepartament(
         {
             id: row.id, 
-            name: departament?.name,
             workDaysUrId: departament?.workDaysUrId,
             workDaysFizId: departament?.workDaysUrId,
             address: departament?.address,
@@ -239,7 +241,7 @@ const DepartamentModule: React.FC = () => {
             has_ramp: departament?.has_ramp,
             kep: departament?.kep,
             myBranch: departament?.myBranch,
-            locality_id: id
+            localityId: id
         });
   };
 
@@ -266,9 +268,9 @@ const DepartamentModule: React.FC = () => {
     };
   });
 
-//   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     setName(e.target.value);
-//   }
+  const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  }
 
   const clickHandler = () => {
     //TODO create
@@ -295,13 +297,36 @@ const DepartamentModule: React.FC = () => {
     // ]);
   }
 
+  const clickOpenHandler = () => {
+    setVisible(true);
+  }
+
+  const clickHide = () => {
+    setVisible(false);
+  }
+
+  const theme = useContext(ThemeContext);
+  const [visible, setVisible] = useState<boolean>(false);
+
   return (
     <div className={styles.wrap}>
-        <h1>Офисы</h1>
-        <div>
-            {/* <input onChange={changeHandler} type={'text'} placeholder='Название города'/> */}
-            <PrimaryButtom content={"Добавить департамент"} onClick={clickHandler}/>
+        <h1 className={[styles[theme], styles.title].join(' ')}>Офисы</h1>
+        <div className={styles.form_wrap}>
+            <PrimaryButtom content={"Добавить департамент"} onClick={clickOpenHandler}/>
         </div>
+
+        {
+            visible
+            ?
+                <div className={styles.wrap_form_big} onClick={clickHide}>
+                    <div className={styles.form}>
+                        <h1 className={[styles[theme], styles.title].join(' ')}>Добавить офис</h1>
+                        <input onChange={changeHandler} type={'text'} placeholder='Название города'/>
+                    </div>
+                </div>
+            :
+                null
+        }
 
         { error && <h1>Произошла ошибка при загрузке</h1>}
         { isLoading 

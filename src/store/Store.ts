@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { atmAPI } from "../services/ATMsService";
 import { countryAPI } from "../services/CountriesService";
+import { workDayAPI } from "../services/DaysService";
 import { departamentAPI } from "../services/DepartamentsSetvice";
 import { localityAPI } from "../services/LocalitiesService";
 import { stateAPI } from "../services/StatesService";
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
     [stateAPI.reducerPath]: stateAPI.reducer,
     [localityAPI.reducerPath]: localityAPI.reducer,
     [departamentAPI.reducerPath]: departamentAPI.reducer,
-    [atmAPI.reducerPath]: atmAPI.reducer
+    [atmAPI.reducerPath]: atmAPI.reducer,
+    [workDayAPI.reducerPath]: workDayAPI.reducer
 });
 
 const setupStore = () => {
@@ -22,7 +24,8 @@ const setupStore = () => {
             stateAPI.middleware, 
             localityAPI.middleware,
             departamentAPI.middleware,
-            atmAPI.middleware
+            atmAPI.middleware,
+            workDayAPI.middleware
         )
     });
 }

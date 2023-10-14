@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import ATMModule from "../modules/AdminModules/ATMs/ATMModule";
+import ConectModule from "../modules/AdminModules/ConectModule";
 import CountryModule from "../modules/AdminModules/Countries/CountryModule";
 import DepartamentModule from "../modules/AdminModules/Departaments/DepartamentModule";
 import LocalityModule from "../modules/AdminModules/Localities/LocalityModule";
@@ -39,6 +40,10 @@ const Router = createBrowserRouter([
       children: [
         {
           path: '/',
+          element: <ConectModule/>
+        },
+        {
+          path: '/countries',
           element: <CountryModule/>
         },
         {
