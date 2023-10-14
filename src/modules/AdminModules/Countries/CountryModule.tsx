@@ -132,11 +132,10 @@ const CountryModule: React.FC = () => {
       editable: false
     },
     {
-      title: 'name',
+      title: 'Название',
       dataIndex: 'name',
       width: '30%',
       editable: true,
-    //   sorter: (a, b) => a.name.length - b.name.length,
       sorter: (a, b) => {
         if (a.name.toLowerCase() < b.name.toLowerCase()) {
           return -1;
@@ -149,7 +148,7 @@ const CountryModule: React.FC = () => {
       sortDirections: ['descend', 'ascend']
     },
     {
-      title: 'operation',
+      title: '',
       dataIndex: 'operation',
       width: '30%',
       //@ts-ignore

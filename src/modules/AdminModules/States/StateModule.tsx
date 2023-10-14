@@ -1,12 +1,13 @@
 import { countryAPI } from "../../../services/CountriesService";
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import type { InputRef } from 'antd';
+import { InputRef, Select } from 'antd';
 import { Form, Input, Popconfirm, Table } from 'antd';
 import type { FormInstance } from 'antd/es/form';
 import PrimaryButtom from "../../../ui/buttons/PrimaryButton";
 import { IState, IStateNameCountry } from "../../../entities/State";
 import { stateAPI } from "../../../services/StatesService";
 import styles from '../../css/Module.module.css';
+import { ThemeContext } from "../../..";
 
 const EditableContext = React.createContext<FormInstance<any> | null>(null);
 
@@ -116,6 +117,7 @@ const StateModule: React.FC = () => {
     const {data: countries, error: errorCountry, isLoading: isLoandingCountry} = countryAPI.useFetchAllCountriesQuery(100);
 
     const [name, setName] = useState<string>('');
+    const [idCountry, setIdCountry] = useState<number | undefined>();
     const [statesWithCOuntryName, setStatesWithCOuntryName] = useState<IStateNameCountry[]>([]);
     const [isLoading, setIsLoanding] = useState<boolean>(true);
 
@@ -126,7 +128,7 @@ const StateModule: React.FC = () => {
 
     useEffect(() => {
         createData();
-    }, [isLoandingCountry, isLoandingState, states])
+    }, [isLoandingCountry, isLoandingState, states, idCountry])
 
   const createData = () => {
     const result: IStateNameCountry[] | undefined = states?.map( state => ( { id: state.id, name: state.name,  countryName: countries?.find(item => item.id == state.countryId)?.name} as IStateNameCountry ) );
@@ -151,7 +153,7 @@ const StateModule: React.FC = () => {
       editable: false
     },
     {
-      title: 'name',
+      title: 'Название',
       dataIndex: 'name',
       editable: true,
       sorter: (a, b) => {
@@ -166,7 +168,7 @@ const StateModule: React.FC = () => {
       sortDirections: ['descend', 'ascend']
     },
     {
-        title: 'country name',
+        title: 'Название страны',
         dataIndex: 'countryName',
         editable: true,
         sorter: (a, b) => {
@@ -180,7 +182,7 @@ const StateModule: React.FC = () => {
           },
     },
     {
-      title: 'operation',
+      title: '',
       dataIndex: 'operation',
       //@ts-ignore
       render: (_, record: { id: number }) =>
@@ -226,16 +228,48 @@ const StateModule: React.FC = () => {
   }
 
   const clickHandler = () => {
-        //TODO create
-    createState([{id:0, name:name, countryId: 1}]);
+    createState([{id:0, name:name, countryId: idCountry?idCountry:1}]);
   }
+
+  const onChange = (value: string) => {
+    console.log(value); 
+    console.log(Number(value));
+    setIdCountry(Number(value));
+    console.log(idCountry);
+  };
+  
+  const onSearch = (value: string) => {
+    console.log('search:', value);
+  };
+  
+  const filterOption = (input: string, option?: { label: string; value: string }) =>
+    (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
+
+  const theme = useContext(ThemeContext);
 
   return (
     <div className={styles.wrap}>
-        <h1>Субъекты</h1>
-        <div>
-            <input onChange={changeHandler} type={'text'} placeholder='Название области'/>
-            <PrimaryButtom content={"Добавить область"} onClick={clickHandler}/>
+        <h1 className={[styles[theme], styles.title].join(' ')}>Субъекты</h1>
+        <div className={styles.form_wrap}>
+            <div className={[styles[`${theme}_back`], styles.input_wrap].join(' ')}>
+              <input className={[styles[theme], styles.input].join(' ')} onChange={changeHandler} type={'text'} placeholder='Название области'/>
+            </div>
+
+            <Select
+              showSearch
+              placeholder="Выберите страну"
+              optionFilterProp="children"
+              onChange={onChange}
+              onSearch={onSearch}
+              filterOption={filterOption}
+              options={
+              countries?.map(item => ({value: item.id.toString(), label: item.name}))
+            }
+            />
+
+            <div className={styles.wrap_button}>
+              <PrimaryButtom content={"ОК"} onClick={clickHandler}/>
+            </div>
         </div>
 
         { error && <h1>Произошла ошибка при загрузке</h1>}
