@@ -6,6 +6,7 @@ import CountryModule from "../modules/AdminModules/Countries/CountryModule";
 import DepartamentModule from "../modules/AdminModules/Departaments/DepartamentModule";
 import LocalityModule from "../modules/AdminModules/Localities/LocalityModule";
 import StateModule from "../modules/AdminModules/States/StateModule";
+import StaticModule from "../modules/AdminModules/StatisticModule";
 import AdminPage from "../pages/AdminPage";
 import InformationPage from "../pages/InformationPage";
 import MainPage from "../pages/MainPage";
@@ -36,34 +37,45 @@ const Router = createBrowserRouter([
     // }
     {
       path: '/',
-      element: <AdminPage/>,
+      element: <MainPage/>,
       children: [
         {
-          path: '/',
-          element: <ConectModule/>
+          path: '/admin',
+          element: <AdminPage/>,
+          children: [
+            {
+              path: '/admin',
+              element: <ConectModule/>
+            },
+            {
+              path: '/admin/countries',
+              element: <CountryModule/>
+            },
+            {
+              path: '/admin/states',
+              element: <StateModule/>
+            },
+            {
+              path: '/admin/localities',
+              element: <LocalityModule/>
+            },
+            {
+              path: '/admin/offices',
+              element: <DepartamentModule/>
+            },
+            {
+              path: '/admin/atms',
+              element: <ATMModule/>
+            }
+          ]
         },
         {
-          path: '/countries',
-          element: <CountryModule/>
-        },
-        {
-          path: '/states',
-          element: <StateModule/>
-        },
-        {
-          path: '/localities',
-          element: <LocalityModule/>
-        },
-        {
-          path: '/offices',
-          element: <DepartamentModule/>
-        },
-        {
-          path: '/atms',
-          element: <ATMModule/>
+          path: '/statistic',
+          element: <StaticModule/>
         }
       ]
-  }
+    }
+    
   ]);
 
 export default Router;

@@ -1,12 +1,12 @@
 import { useContext, useState } from "react";
-import { ThemeContext } from "..";
 import stylesTheme from '../App.module.css';
+import { ThemeContext } from "../ThemeProvider";
 import styles from './styles/Search.module.css';
 
 const Input = () => {
     const [isWrite, setIsWrite] = useState<boolean>(false);
     const [value, setValue] = useState<string>('');
-    const theme = useContext(ThemeContext);
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);

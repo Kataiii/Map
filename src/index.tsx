@@ -1,4 +1,4 @@
-import React, {useContext, createContext} from 'react';
+import React, {useContext, createContext, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider, ReactReduxContext } from 'react-redux/es/exports';
 import { RouterProvider } from 'react-router-dom';
@@ -10,17 +10,22 @@ import './fonts/VTBGroupUI-Bold.otf';
 import './fonts/VTBGroupUI-Light.otf';
 import './fonts/VTBGroupUI-Medium.otf';
 import './fonts/VTBGroupUI-Regular.otf';
-import { ConfigProvider } from 'antd';
+import { ThemeProvider } from './ThemeProvider';
 
-export const ThemeContext = createContext<Theme>(Theme.light);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+const onClick = () => {
+  
+}
+
 root.render(
   <Provider store = {store}>
-    <ThemeContext.Provider value={Theme.light}>
+    <ThemeProvider>
           <RouterProvider router={Router} />
-    </ThemeContext.Provider>
+    </ThemeProvider>
   </Provider>
 );
+

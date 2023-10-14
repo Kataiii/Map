@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ThemeContext } from '../..';
+import { ThemeContext } from '../../ThemeProvider';
 import styles from './styles/Button.module.css';
 
 
@@ -11,7 +11,7 @@ export interface RouteButtonProps{
 }
 
 const RouteButton: React.FC<RouteButtonProps> = ({content, isActive, onClick}) => {
-    const theme = useContext(ThemeContext);
+    const { theme, toggleTheme } = useContext(ThemeContext);
     const background = isActive? styles.primary_btn : styles[`${theme}_button`];
     const colorText = isActive?styles.primary_btn_content : styles[`${theme}_button_content`];
 

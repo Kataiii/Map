@@ -7,7 +7,7 @@ import PrimaryButtom from "../../../ui/buttons/PrimaryButton";
 import { IState, IStateNameCountry } from "../../../entities/State";
 import { stateAPI } from "../../../services/StatesService";
 import styles from '../../css/Module.module.css';
-import { ThemeContext } from "../../..";
+import { ThemeContext } from "../../../ThemeProvider";
 
 const EditableContext = React.createContext<FormInstance<any> | null>(null);
 
@@ -245,7 +245,7 @@ const StateModule: React.FC = () => {
   const filterOption = (input: string, option?: { label: string; value: string }) =>
     (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
 
-  const theme = useContext(ThemeContext);
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
     <div className={styles.wrap}>

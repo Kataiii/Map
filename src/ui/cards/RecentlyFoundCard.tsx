@@ -3,7 +3,7 @@ import { IDepartament } from "../../entities/Departament";
 import Hours from '../../assets/icon-hours.svg';
 import Delete from '../../assets/icon-delete-white.svg';
 import styles from './styles/Card.module.css';
-import { ThemeContext } from "../..";
+import { ThemeContext } from "../../ThemeProvider";
 
 interface RecentlyFoundCardProps{
     departament : IDepartament;
@@ -12,7 +12,7 @@ interface RecentlyFoundCardProps{
 }
 
 const RecentlyFoundCard: React.FC<RecentlyFoundCardProps> = ({departament, clickHandler, clickDeleteHandler}) => {
-    const theme = useContext(ThemeContext);
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
     return(
         <div className={styles.wrap_card_recently} onClick={clickHandler}>

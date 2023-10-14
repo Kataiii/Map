@@ -3,7 +3,6 @@ import { IDepartament, IDepartamentVTB } from "../../entities/Departament";
 import { ILocality } from "../../entities/Locality";
 import { IState } from "../../entities/State";
 import { IWorkDay, IWorkDayVTB } from "../../entities/WorkDay";
-import { countryAPI } from "../../services/CountriesService"
 import { workDayAPI } from "../../services/DaysService";
 import { departamentAPI } from "../../services/DepartamentsSetvice";
 import { localityAPI } from "../../services/LocalitiesService";

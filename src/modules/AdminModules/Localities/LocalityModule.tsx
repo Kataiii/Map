@@ -8,7 +8,8 @@ import { stateAPI } from "../../../services/StatesService";
 import styles from '../../css/Module.module.css';
 import { localityAPI } from "../../../services/LocalitiesService";
 import { ILocality, ILocalityNameState } from "../../../entities/Locality";
-import { ThemeContext } from "../../..";
+import { ThemeContext } from "../../../ThemeProvider";
+
 
 
 const EditableContext = React.createContext<FormInstance<any> | null>(null);
@@ -256,7 +257,7 @@ const LocalityModule: React.FC = () => {
   const filterOption = (input: string, option?: { label: string; value: string }) =>
     (option?.label ?? '').toLowerCase().includes(input.toLowerCase());
 
-  const theme = useContext(ThemeContext);
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
     <div className={styles.wrap}>

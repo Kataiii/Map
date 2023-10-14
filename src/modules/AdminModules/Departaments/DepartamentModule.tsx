@@ -7,7 +7,7 @@ import styles from '../../css/Module.module.css';
 import { localityAPI } from "../../../services/LocalitiesService";
 import { departamentAPI } from "../../../services/DepartamentsSetvice";
 import { IDepartament, IDepartamentWithLocality } from '../../../entities/Departament';
-import { ThemeContext } from '../../..';
+import { ThemeContext } from '../../../ThemeProvider';
 
 
 const EditableContext = React.createContext<FormInstance<any> | null>(null);
@@ -305,7 +305,7 @@ const DepartamentModule: React.FC = () => {
     setVisible(false);
   }
 
-  const theme = useContext(ThemeContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const [visible, setVisible] = useState<boolean>(false);
 
   return (

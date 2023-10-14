@@ -72,3 +72,57 @@
 .form{
     width: 40%;
 }
+
+.mainConteiner{
+    padding: 0 54px;
+    display: flex;
+    flex-direction: column;
+    gap: 38px;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapConteiner{
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrapDarkConteiner{
+    background-color: #1A1D24;
+    width: 607px;
+    height: 170px;
+    border-radius: 15px;
+    padding: 26px 28px;
+    }
+
+.wrapLightConteiner{
+    background-color: #fff;
+    width: 607px;
+    height: 170px;
+    border-radius: 15px;
+    padding: 26px 28px;
+}
+
+.wrapCont{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.headerDark{
+    color: #CACACA;
+    font-family: Inter;
+    font-size: 23.02px;
+    font-style: normal;
+    font-weight: 700;
+
+}
+
+.headerLight{
+    color: #000;
+    font-family: Inter;
+    font-size: 23.02px;
+    font-style: normal;
+    font-weight: 700;
+}

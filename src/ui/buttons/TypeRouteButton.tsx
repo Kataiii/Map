@@ -1,7 +1,7 @@
 import styles from './styles/Button.module.css';
 import {useContext} from 'react';
-import { ThemeContext } from '../..';
 import styleTheme from '../../App.module.css';
+import { ThemeContext } from '../../ThemeProvider';
 
 
 interface TypeRouteBtnProps{
@@ -13,7 +13,7 @@ interface TypeRouteBtnProps{
 }
 
 const TypeRouteButton: React.FC<TypeRouteBtnProps> = ({icon, alt, content, onClick, isActive}) => {
-    const theme = useContext(ThemeContext);
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
     return(
         <div className={[styles.btnTypeRoute, isActive?styleTheme.activeColor:styleTheme[theme]].join(' ')} onClick={onClick}>

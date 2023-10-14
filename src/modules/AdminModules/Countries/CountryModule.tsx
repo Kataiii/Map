@@ -6,7 +6,7 @@ import type { FormInstance } from 'antd/es/form';
 import { ICountry } from "../../../entities/Country";
 import PrimaryButtom from "../../../ui/buttons/PrimaryButton";
 import styles from '../../css/Module.module.css';
-import { ThemeContext } from "../../..";
+import { ThemeContext } from "../../../ThemeProvider";
 
 
 const EditableContext = React.createContext<FormInstance<any> | null>(null);
@@ -197,7 +197,7 @@ const CountryModule: React.FC = () => {
     setName('');
   }
 
-  const theme = useContext(ThemeContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   return (
     <div className={styles.wrap}>

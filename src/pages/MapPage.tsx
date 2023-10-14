@@ -3,19 +3,19 @@ import FavouritesCard from '../ui/cards/FavouritesCard';
 import { YMaps } from '@pbe/react-yandex-maps';
 import MapComponent from '../modules/Map/components/Map';
 import { useContext, useState, useEffect } from 'react';
-import { ThemeContext } from '..';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import styles from '../App.module.css';
 import Delete from '../assets/icon-delete-white.svg';
 import React from 'react';
 import * as ymaps3 from 'ymaps3';
+import { ThemeContext } from '../ThemeProvider';
 //@ts-ignore
 const reactify = ymaps3.reactify.bindTo(React, ReactDOM);
 const {YMap} = reactify.module(ymaps3);
 
 const MapPage = () => {
   const [visible, setVisible] = useState<boolean>(false);
-  const theme = useContext(ThemeContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const location = useLocation();
   const navigate = useNavigate();
 

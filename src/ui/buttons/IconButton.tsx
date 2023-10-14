@@ -1,8 +1,8 @@
 import React, {useContext} from "react";
-import { ThemeContext } from "../..";
 import { SizeBtn, Theme } from "../../entities/Theme";
 import styles from './styles/IconButton.module.css'
 import stylesTheme from '../../App.module.css';
+import { ThemeContext } from "../../ThemeProvider";
 
 
 interface IconButtonProps{
@@ -14,7 +14,7 @@ interface IconButtonProps{
 
 
 const IconButton : React.FC<IconButtonProps> = ({icon, alt, onClick, size}) => {
-    const theme = useContext(ThemeContext);
+    const { theme, toggleTheme } = useContext(ThemeContext);
     const style: string = `${size}_iconBtn`;
     const styleTheme: string = `${theme}`;
 

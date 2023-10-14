@@ -2,14 +2,14 @@ import {useState, useContext} from 'react';
 import IconSearch from '../assets/icon-search.svg';
 import IconDelete from '../assets/icon-delete.svg';
 import styles from './styles/Search.module.css';
-import { ThemeContext } from '..';
 import stylesTheme from '../App.module.css';
+import { ThemeContext } from '../ThemeProvider';
 
 
 const Search: React.FC = () => {
     const [isWrite, setIsWrite] = useState<boolean>(false);
     const [value, setValue] = useState<string>('');
-    const theme = useContext(ThemeContext);
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);

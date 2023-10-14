@@ -17,3 +17,25 @@
     justify-content: flex-start;
     padding-top: 55px;
 }
+
+.image_switch{
+    display: block;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.wrap_switch{
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.lightpage{
+    background-color: #F1F2F6;
+    min-height: 100vh;
+}
+
+.backpage{
+    background-color: #363E4B;
+    min-height: 100vh;
+}

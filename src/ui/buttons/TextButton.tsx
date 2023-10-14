@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ThemeContext } from '../..';
+import { ThemeContext } from '../../ThemeProvider';
 import styles from './styles/Button.module.css';
 
 
@@ -9,7 +9,7 @@ interface TextButtonProps{
 }
 
 const TextButton: React.FC<TextButtonProps> = ({content, onClick}) => {
-    const theme = useContext(ThemeContext);
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
 
     return(

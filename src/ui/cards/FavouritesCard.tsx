@@ -1,16 +1,16 @@
 import { IDepartament } from "../../entities/Departament";
 import styles from './styles/Card.module.css';
 import { useContext } from "react";
-import { ThemeContext } from "../..";
 import Phone from '../../assets/icon-telephone.svg';
 import Route from '../../assets/icon-route.svg';
+import { ThemeContext } from "../../ThemeProvider";
 
 interface FavouritesCardProps{
     departament: IDepartament
 }
 
 const FavouritesCard: React.FC<FavouritesCardProps> = ({departament}) => {
-    const theme = useContext(ThemeContext);
+    const { theme, toggleTheme } = useContext(ThemeContext);
     // const styleWrapImages = departament.isBank?styles.wrapImages:styles.wrapImagesSmall;
 
     return(
