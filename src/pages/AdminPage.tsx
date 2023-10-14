@@ -3,13 +3,13 @@ import type { TabsProps } from 'antd';
 import CountryModule from "../modules/AdminModules/Countries/CountryModule";
 import StateModule from "../modules/AdminModules/States/StateModule";
 import styles from './css/AdminPage.module.css';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '..';
 import LocalityModule from '../modules/AdminModules/Localities/LocalityModule';
 import DepartamentModule from '../modules/AdminModules/Departaments/DepartamentModule';
 import ATMModule from '../modules/AdminModules/ATMs/ATMModule';
 import RouteButton, { RouteButtonProps } from '../ui/buttons/RouteButton';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 
 const contentButtons: RouteButtonProps[] = [
@@ -46,15 +46,20 @@ const contentButtons: RouteButtonProps[] = [
 ]
 
 const AdminPage = () => {
+  const locate = useLocation();
   const navigate = useNavigate();
   const theme = useContext(ThemeContext);
   const [stateNav, setStateNav] = useState<boolean[]>([true, false, false, false, false]);
+
+  useEffect(() => {
+    const newArray = Array(5).fill(false).map((item, index) => contentButtons[index].nameRoute === locate.pathname ? item = true : item = false);
+    setStateNav(newArray);
+  }, [locate.pathname])
 
   const clickHandler = (item: RouteButtonProps,index: number) => {
       let newState: boolean[] = Array(5).fill(false);
       newState[index] = true;
       setStateNav(newState);
-      //изменение массива
       navigate(item.nameRoute);
   }
 
