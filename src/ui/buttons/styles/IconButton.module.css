@@ -1,0 +1,16 @@
+.icon_button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.small_iconBtn{
+    width: 45px;
+    height: 45px;
+}
+
+.medium_iconBtn{
+    width: 55px;
+    height: 55px;
+}

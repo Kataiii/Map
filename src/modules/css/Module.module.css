@@ -1,0 +1,57 @@
+.title{
+    font-family: "VTBGroupUI";
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.dark{
+    color: #FFF;
+}
+
+.light{
+    color: #1A1D24;
+}
+
+.dark_back{
+    background-color: #363E4B;
+}
+
+.light_back{
+    background-color: #FFF;
+}
+
+.wrap{
+    padding-top: 50px;
+}
+
+.input_wrap{
+    display: flex;
+    width: 373px;
+    height: 55px;
+    padding: 16px;
+    border-radius: 15px;
+}
+
+.input{
+    background-color: #181a1d00;
+    border: none;
+    outline: none;
+    color: #A7B0BF;
+    /* text-align: center; */
+    font-family: 'VTBGroupUI';
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 300;
+}
+
+.wrap_button{
+    width: 60px;
+}
+
+.form_wrap{
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 24px 0;
+}

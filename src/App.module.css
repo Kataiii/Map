@@ -1,3 +1,96 @@
 .App {
   text-align: center;
 }
+
+p{
+  background-color: #03378600;
+}
+
+p:hover{
+  background-color: #03378600;
+}
+
+p:active{
+  background-color: #03378600;
+}
+
+.light_background{
+  background-color: #fff;
+}
+
+.dark_background{
+  background-color:#1A1D24;
+}
+
+.light{
+  background-color: #fff;
+  color: #1A1D24;
+}
+
+.light:hover{
+  background-color: #e7e7e7;
+}
+
+.light:active{
+  background-color: #c9c9c9;
+}
+
+.dark{
+  background-color: #363E4B;
+  color: #A7B0BF;
+}
+
+.dark:hover{
+  background-color: #2b313b;
+}
+
+.dark:active{
+  background-color: #191c22;
+}
+
+.activeColor{
+  background-color: #0450C0;
+}
+
+.activeColorText{
+  color: #fff;
+}
+
+.activeColor:hover{
+  background: #0449b1;
+}
+
+.activeColor:active{
+  background: #033886;
+}
+
+.main_board{
+  position: fixed;
+  top: 65px;
+  left: 35px;
+  border-radius: 30px;
+  box-shadow: 0px 4px 60px 0px rgba(26, 29, 36, 0.60);
+  width: 413px;
+  max-width: 413px;
+  height: 894px;
+  max-height: 85vh;
+}
+
+.btn_back{
+  width: 55px;
+  height: 55px;
+  background: #1A1D24;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: fixed;
+  top: 85px;
+  left: 471px;
+  border-radius: 15px;
+}
+
+.not_visible{
+  display: none;
+  visibility: hidden;
+}

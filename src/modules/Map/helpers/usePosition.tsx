@@ -1,13 +1,11 @@
 import { useState, useEffect, useLayoutEffect } from "react";
+import { IPosition } from "../../../entities/Position";
 
-export interface PositionObject{
-    latitude: number;
-    longitude: number;
-}
+
 
 const usePosition = () => {
     const geo = navigator.geolocation;
-    const [position, setPosition] = useState<PositionObject>({latitude: 55.75, longitude: 37.57});
+    const [position, setPosition] = useState<IPosition>({latitude: 55.75, longitude: 37.57});
     const [error, setError] = useState<string | null>(null);
 
     const onErrorHandler = (error : Error) => {

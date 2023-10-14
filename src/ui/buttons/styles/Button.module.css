@@ -1,0 +1,139 @@
+.primary_button{
+    border-radius: 15px;
+    background: #0450C0;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    width: 100%;
+    padding: 17px;
+}
+
+.primary_button:hover{
+    background: #0449b1;
+}
+
+.primary_button:active{
+    background: #033886;
+}
+
+.btnTypeRoute{
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    gap: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.btnTypeRouteText{
+    font-family: Inter;
+    width: max-content;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+
+.default{
+    color: #A7B0BF;
+}
+
+.dark_theme{
+    background-color: #363E4B;
+    color: #A7B0BF;
+}
+
+.light_theme{
+    background-color: #F4F7FA;
+    color: #363E4B;
+}
+
+.btn_text{
+    border-radius: 15px;
+    display: inline-flex;
+    padding: 17px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.btn_text_content{
+    text-align: center;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.dark_button{
+    background-color: #1A1D24;
+}
+
+.dark_button:hover{
+    background-color: #232831;
+}
+
+.dark_button:active{
+    background-color: #303642;
+}
+
+.light_button{
+    background-color: #F4F7FA;
+}
+
+.light_button:hover{
+    background-color: #e0e3e6;
+}
+
+.light_button:hover{
+    background-color: #b8babd;
+}
+
+.route_panel{
+    border-radius: 15px;
+    border: 1px solid #363E4B;
+    display: flex;
+    justify-content: center;
+    padding: 17px 25px;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.dark_button_content{
+    color: #A7B0BF;
+}
+
+.light_button_content{
+    color: #363E4B ;
+}
+
+.route_panel_content{
+    text-align: center;
+    font-family: "VTBGroupUI";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.primary_btn{
+    background: #0450C0;
+}
+
+.primary_btn:hover{
+    background: #0448af;
+}
+
+.primary_btn:active{
+    background: #033580;
+}
+
+.primary_btn_content{
+    color: #FFF;
+}

@@ -7,6 +7,12 @@
       "esnext"
     ],
     "allowJs": true,
+    // "typeRoots": [
+    //   "./types/ymaps3"
+    // ],
+    // "paths": {
+    //   "ymaps3": ["src/types/ymaps3/ymaps3"]
+    // },
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
