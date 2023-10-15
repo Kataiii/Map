@@ -3,8 +3,8 @@ import { IWorkDay, IWorkDayVTB } from "./WorkDay";
 export interface IDepartament{
     id: number;
     localityId?: number;
-    workDaysUrId?: IWorkDay;
-    workDaysFizId?: IWorkDay;
+    workDaysUrId?: any;
+    workDaysFizId?: any;
     address?: string;
     coord_x?: string;
     coord_y?: string;

@@ -40,15 +40,11 @@ const Router = createBrowserRouter([
       element: <MainPage/>,
       children: [
         {
-          path: '/admin',
+          path: '/',
           element: <AdminPage/>,
           children: [
             {
-              path: '/admin',
-              element: <ConectModule/>
-            },
-            {
-              path: '/admin/countries',
+              path: '/',
               element: <CountryModule/>
             },
             {
@@ -62,10 +58,6 @@ const Router = createBrowserRouter([
             {
               path: '/admin/offices',
               element: <DepartamentModule/>
-            },
-            {
-              path: '/admin/atms',
-              element: <ATMModule/>
             }
           ]
         },

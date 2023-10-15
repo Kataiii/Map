@@ -9,6 +9,7 @@ import styles from '../../css/Module.module.css';
 import { localityAPI } from "../../../services/LocalitiesService";
 import { ILocality, ILocalityNameState } from "../../../entities/Locality";
 import { ThemeContext } from "../../../ThemeProvider";
+import { localities } from "../../../entities/Country";
 
 
 
@@ -117,7 +118,7 @@ type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
 const LocalityModule: React.FC = () => {
 
     const {data: states, error, isLoading: isLoandingState} = stateAPI.useFetchAllStatesQuery(10);
-    const {data: localities, error: errorLocality, isLoading: isLoandingLocality} = localityAPI.useFetchAllLocalitiesQuery(10);
+    // const {data: localities, error: errorLocality, isLoading: isLoandingLocality} = localityAPI.useFetchAllLocalitiesQuery(10);
 
     const [name, setName] = useState<string>('');
     const [idState, setIdState] = useState<number | undefined>();
@@ -132,10 +133,10 @@ const LocalityModule: React.FC = () => {
 
     useEffect(() => {
         createData();
-    }, [isLoandingLocality, isLoandingState, localities, idState])
-
-  const createData = () => {
-    const result: ILocalityNameState[] | undefined = localities?.map( locality => ( 
+    }, [isLoandingState, idState])
+  
+    const createData = () => {
+    const result: ILocalityNameState[] | undefined = localities.map( locality => ( 
         {
             id: locality.id,
             name: locality.name,

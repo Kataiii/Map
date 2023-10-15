@@ -8,6 +8,7 @@ import { localityAPI } from "../../../services/LocalitiesService";
 import { departamentAPI } from "../../../services/DepartamentsSetvice";
 import { IDepartament, IDepartamentWithLocality } from '../../../entities/Departament';
 import { ThemeContext } from '../../../ThemeProvider';
+import { departaments, localities } from '../../../entities/Country';
 
 
 const EditableContext = React.createContext<FormInstance<any> | null>(null);
@@ -116,8 +117,8 @@ type ColumnTypes = Exclude<EditableTableProps['columns'], undefined>;
 
 const DepartamentModule: React.FC = () => {
 
-    const {data: departaments, error, isLoading: isLoandingDepartament} = departamentAPI.useFetchAllDepartaQuery(20);
-    const {data: localities, error: errorLocality, isLoading: isLoandingLocality} = localityAPI.useFetchAllLocalitiesQuery(10);
+    // const {data: departaments, error, isLoading: isLoandingDepartament} = departamentAPI.useFetchAllDepartaQuery(20);
+    // const {data: localities, error: errorLocality, isLoading: isLoandingLocality} = localityAPI.useFetchAllLocalitiesQuery(10);
 
     const [name, setName] = useState<string>('');
     const [departamentsWithLocalityName, setDepartamentsWithLocalityName] = useState<IDepartamentWithLocality[]>([]);
@@ -130,15 +131,15 @@ const DepartamentModule: React.FC = () => {
 
     useEffect(() => {
         createData();
-    }, [isLoandingLocality, isLoandingDepartament, departaments])
+    }, [])
 
   const createData = () => {
-    const result: IDepartamentWithLocality[] | undefined = departaments?.map( departament => ( 
+    const result: IDepartamentWithLocality[] | undefined = departaments.map( departament => ( 
         {
             id: departament.id,
             sale_point_name: departament.sale_point_format,
             address: departament.address,
-            localityName: localities?.find(item => item.id == departament.localityId)?.name
+            localityName: localities.find(item => item.id == departament.localityId)?.name
             // localityName: departament.localityId?.toString()
         } as IDepartamentWithLocality
     ) );
@@ -328,7 +329,7 @@ const DepartamentModule: React.FC = () => {
                 null
         }
 
-        { error && <h1>Произошла ошибка при загрузке</h1>}
+        {/* { <h1>Произошла ошибка при загрузке</h1>} */}
         { isLoading 
             ?
                 <h1>Идет загрузка</h1>

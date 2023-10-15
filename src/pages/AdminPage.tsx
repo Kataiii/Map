@@ -13,7 +13,7 @@ const contentButtons: RouteButtonProps[] = [
   {
     content: 'Страны',
     isActive: true,
-    nameRoute: '/admin/countries',
+    nameRoute: '/',
     onClick: () => console.log('1')
   },
   {
@@ -33,12 +33,6 @@ const contentButtons: RouteButtonProps[] = [
     isActive: false,
     nameRoute: '/admin/offices',
     onClick: () => console.log('4')
-  },
-  {
-    content: 'Банкоматы',
-    isActive: false,
-    nameRoute: '/admin/atms',
-    onClick: () => console.log('5')
   }
 ]
 
@@ -46,10 +40,10 @@ const AdminPage = () => {
   const locate = useLocation();
   const navigate = useNavigate();
   const { theme, toggleTheme } = useContext(ThemeContext);
-  const [stateNav, setStateNav] = useState<boolean[]>([true, false, false, false, false]);
+  const [stateNav, setStateNav] = useState<boolean[]>([true, false, false, false]);
 
   useEffect(() => {
-    const newArray = Array(5).fill(false).map((item, index) => contentButtons[index].nameRoute === locate.pathname ? item = true : item = false);
+    const newArray = Array(4).fill(false).map((item, index) => contentButtons[index].nameRoute === locate.pathname ? item = true : item = false);
     setStateNav(newArray);
   }, [locate.pathname, theme])
 
